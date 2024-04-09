@@ -26,15 +26,38 @@ int gcd(int a, int b)
 /*------------------------------------------------------------*/
 
 
+int p(int m, int x, vi a)
+{
+	int sum = 0;
 
+	for0(i, a.size())sum += (m / a[i]);
 
+	return sum >= x ?  true :  false;
+}
 
 void solve()
 {
-	int n; cin >> n;
+	int n, k; cin >> n >> k;
 	vi a(n);
-	for (auto &i : a)cin >> i;
-	cout << 1 << endl;
+	int l = 1, r = 1e10;
+	for (auto &i : a)
+	{
+		cin >> i;
+		r = min(r, i);
+	}
+	r = r * k;
+	int ans;
+
+	while (l <= r)
+	{
+		int m = (l + r) / 2;
+		p(m, k, a) ? ans = m, r = m - 1 : l = m + 1;
+	}
+
+	cout << ans << endl;
+
+
+
 }
 
 signed main()
